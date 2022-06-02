@@ -78,18 +78,18 @@ class CommandReadyState extends State<CommandReady> {
                                                     fontWeight: FontWeight.w400,
                                                     color: Colors.black),
                                               ),
-                                              trailing:
-                                                  modelcom[i].isReady == true
-                                                      ? Row(
-                                                          children: const [
-                                                            Text('Ready')
-                                                          ],
-                                                        )
-                                                      : Row(
-                                                          children: const [
-                                                            Text('In Progress')
-                                                          ],
-                                                        ));
+                                              trailing: modelcom[i].isReady ==
+                                                      true
+                                                  ? Row(
+                                                      children: const [
+                                                        Text('Ready')
+                                                      ],
+                                                    )
+                                                  : Row(
+                                                      children: const [
+                                                        Text('In Progress...')
+                                                      ],
+                                                    ));
                                         });
                                   })
                             ],
