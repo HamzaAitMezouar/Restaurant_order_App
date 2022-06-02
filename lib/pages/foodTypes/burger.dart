@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant_menu/controller/itemController.dart';
+import 'package:restaurant_menu/controller/provider/CommandProvider.dart';
 import 'package:restaurant_menu/models/items.dart';
 import 'package:restaurant_menu/pages/foodTypes/beverage.dart';
 import 'package:restaurant_menu/utils/constant.dart';
@@ -10,6 +12,9 @@ import 'package:restaurant_menu/widgets/Shimmer.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../../widgets/FadeAnimation.dart';
 import 'dart:ui' as ui;
+
+import '../Home.dart';
+import 'dessert.dart';
 
 class burgers extends StatefulWidget {
   int floor;
@@ -55,6 +60,7 @@ class burgersState extends State<burgers> {
 
   @override
   Widget build(BuildContext context) {
+    final burger = Provider.of<CommandProvider>(context);
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -109,8 +115,10 @@ class burgersState extends State<burgers> {
                                 1.8,
                                 InkWell(
                                   onTap: () {
+                                    burger.addItem(items[index]);
                                     print(NumberofOtems);
-                                    dialog(context);
+                                    dialog(context, burger);
+                                    burger.addtotalprice(items[index].price);
                                   },
                                   child: Container(
                                     height: index % 3 == 0
@@ -202,43 +210,50 @@ class burgersState extends State<burgers> {
         ));
   }
 
-  Future<dynamic> dialog(BuildContext context) {
+  Future<dynamic> dialog(BuildContext context, CommandProvider burger) {
     return showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        content: Container(
-            height: size.height * 0.2,
-            width: size.width * 0.4,
-            child: Lottie.asset('assets/fries.json')),
-        title: Text(
-          'Extra Fries ?',
-          style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              foreground: Paint()
-                ..shader = ui.Gradient.linear(
-                  const Offset(0, 20),
-                  const Offset(150, 20),
-                  <Color>[
-                    Color.fromARGB(255, 155, 22, 22),
-                    Color.fromARGB(255, 255, 145, 0),
-                  ],
-                )),
+      builder: (context) => FadeAnimation(
+        1.5,
+        AlertDialog(
+          content: Container(
+              height: size.height * 0.2,
+              width: size.width * 0.4,
+              child: Lottie.asset('assets/fries.json')),
+          title: Text(
+            'Extra Fries ?',
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                foreground: Paint()
+                  ..shader = ui.Gradient.linear(
+                    const Offset(0, 20),
+                    const Offset(150, 20),
+                    <Color>[
+                      Color.fromARGB(255, 155, 22, 22),
+                      Color.fromARGB(255, 255, 145, 0),
+                    ],
+                  )),
+          ),
+          elevation: 2,
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  dialogbeverage(context);
+                  burger.removefriesPrice();
+                  burger.FriesNo();
+                },
+                child: const Text('No')),
+            ElevatedButton(
+                onPressed: () {
+                  dialogbeverage(context);
+                  burger.addfriesPrice();
+                  burger.friesYes();
+                },
+                child: const Text('Yes(5\$)'))
+          ],
         ),
-        elevation: 2,
-        actions: [
-          ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-                dialogbeverage(context);
-              },
-              child: const Text('No')),
-          ElevatedButton(
-              onPressed: () {
-                dialogbeverage(context);
-              },
-              child: const Text('Yes(5\$)'))
-        ],
       ),
     );
   }
@@ -246,46 +261,50 @@ class burgersState extends State<burgers> {
   Future<dynamic> dialogbeverage(BuildContext context) {
     return showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        content: Container(
-            height: size.height * 0.2,
-            width: size.width * 0.4,
-            child: Image.asset('assets/bev.jpg')),
-        title: Text(
-          'Beverages ?',
-          style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              foreground: Paint()
-                ..shader = ui.Gradient.linear(
-                  const Offset(0, 20),
-                  const Offset(150, 20),
-                  <Color>[
-                    Color.fromARGB(255, 155, 22, 22),
-                    Color.fromARGB(255, 255, 145, 0),
-                  ],
-                )),
+      builder: (context) => FadeAnimation(
+        1.5,
+        AlertDialog(
+          content: Container(
+              height: size.height * 0.2,
+              width: size.width * 0.4,
+              child: Image.asset('assets/bev.jpg')),
+          title: Text(
+            'Beverages ?',
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                foreground: Paint()
+                  ..shader = ui.Gradient.linear(
+                    const Offset(0, 20),
+                    const Offset(150, 20),
+                    <Color>[
+                      Color.fromARGB(255, 155, 22, 22),
+                      Color.fromARGB(255, 255, 145, 0),
+                    ],
+                  )),
+          ),
+          elevation: 2,
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  dialogdessert(context);
+                },
+                child: const Text('No')),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      pageRoute(
+                          child: beverage(
+                              floor: floor,
+                              table: table,
+                              type: 'beverage',
+                              size: size)));
+                },
+                child: const Text('Yes'))
+          ],
         ),
-        elevation: 2,
-        actions: [
-          ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('No')),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    pageRoute(
-                        child: beverage(
-                            floor: floor,
-                            table: table,
-                            type: 'beverage',
-                            size: size)));
-              },
-              child: const Text('Yes'))
-        ],
       ),
     );
   }
@@ -294,33 +313,55 @@ class burgersState extends State<burgers> {
     Size size = MediaQuery.of(context).size;
     return showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        content: Container(
-            width: size.width * 0.4, child: Lottie.asset('assets/fries.json')),
-        title: Text(
-          'Desserts ?',
-          style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              foreground: Paint()
-                ..shader = ui.Gradient.linear(
-                  const Offset(0, 20),
-                  const Offset(150, 20),
-                  <Color>[
-                    Color.fromARGB(255, 155, 22, 22),
-                    Color.fromARGB(255, 255, 145, 0),
-                  ],
-                )),
+      builder: (context) => FadeAnimation(
+        1.5,
+        AlertDialog(
+          content: Container(
+              width: size.width * 0.4,
+              child: Image.asset('assets/dessertAlert.jpg')),
+          title: Text(
+            'Desserts ?',
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                foreground: Paint()
+                  ..shader = ui.Gradient.linear(
+                    const Offset(0, 20),
+                    const Offset(150, 20),
+                    <Color>[
+                      Color.fromARGB(255, 155, 22, 22),
+                      Color.fromARGB(255, 255, 145, 0),
+                    ],
+                  )),
+          ),
+          elevation: 2,
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pushReplacement(
+                      context,
+                      pageRoute(
+                          child: home(
+                        floor: floor,
+                        table: table,
+                      )));
+                },
+                child: const Text('No')),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      pageRoute(
+                          child: dessert(
+                              floor: floor,
+                              table: table,
+                              type: 'dessert',
+                              size: size)));
+                },
+                child: const Text('Yes'))
+          ],
         ),
-        elevation: 2,
-        actions: [
-          ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('No')),
-          ElevatedButton(onPressed: () {}, child: const Text('Yes'))
-        ],
       ),
     );
   }

@@ -4,21 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 
 import 'package:lottie/lottie.dart';
+import 'package:restaurant_menu/controller/firebase/cashierAuth.dart';
 import 'package:restaurant_menu/controller/firebase/waiterAuth.dart';
+import 'package:restaurant_menu/pages/Tablet/TabletCommand.dart';
 import 'package:restaurant_menu/utils/constant.dart';
 import 'package:restaurant_menu/widgets/FadeAnimation.dart';
 import 'dart:ui' as ui;
 
-import 'TablesPage.dart';
-
-class WaiterSignIn extends StatefulWidget {
-  const WaiterSignIn({Key? key}) : super(key: key);
+class TabletSignIn extends StatefulWidget {
+  const TabletSignIn({Key? key}) : super(key: key);
 
   @override
-  State<WaiterSignIn> createState() => _WaiterSignInState();
+  State<TabletSignIn> createState() => TabletSignInState();
 }
 
-class _WaiterSignInState extends State<WaiterSignIn> {
+class TabletSignInState extends State<TabletSignIn> {
   late String email;
   late String name;
   late String password;
@@ -47,8 +47,8 @@ class _WaiterSignInState extends State<WaiterSignIn> {
                       child: Container(
                         decoration: const BoxDecoration(
                             gradient: LinearGradient(colors: [
-                          Color.fromARGB(255, 21, 168, 82),
-                          Color.fromARGB(255, 44, 248, 129)
+                          Color.fromARGB(255, 245, 141, 5),
+                          Color.fromARGB(255, 226, 222, 0)
                         ])),
                         height: size.height * 0.4,
                       ),
@@ -62,14 +62,14 @@ class _WaiterSignInState extends State<WaiterSignIn> {
                       1.5,
                       SizedBox(
                         height: size.height * 0.3,
-                        child: Lottie.asset('assets/burger.json'),
+                        child: Lottie.asset('assets/cashier.json'),
                       ),
                     ),
                   ),
                 ],
               ),
               Text(
-                'Waiter ',
+                'Cashier',
                 style: TextStyle(
                     fontSize: 28,
                     foreground: Paint()
@@ -77,8 +77,8 @@ class _WaiterSignInState extends State<WaiterSignIn> {
                         const Offset(0, 100),
                         const Offset(150, 20),
                         <Color>[
-                          Constants().green,
-                          const Color.fromARGB(255, 44, 248, 129)
+                          Color.fromARGB(255, 236, 56, 2),
+                          const Color.fromARGB(255, 248, 200, 44)
                         ],
                       )),
               ),
@@ -104,7 +104,7 @@ class _WaiterSignInState extends State<WaiterSignIn> {
                                 onPressed: () {
                                   if (key.currentState!.validate() &&
                                       key.currentState != null) {
-                                    WaiterAuth().signIn(email, password);
+                                    CashierAuth().signIn(email, password);
                                     var user =
                                         FirebaseAuth.instance.currentUser;
                                     print(user);
@@ -115,7 +115,7 @@ class _WaiterSignInState extends State<WaiterSignIn> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  TablesPage()));
+                                                  const TabletCommand()));
                                     }
                                   }
                                 },
@@ -127,12 +127,11 @@ class _WaiterSignInState extends State<WaiterSignIn> {
                                     alignment: Alignment.center,
                                     height: size.height * 0.04,
                                     width: double.infinity,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       gradient: LinearGradient(
                                         colors: [
-                                          Constants().green,
-                                          const Color.fromARGB(
-                                              255, 44, 248, 129)
+                                          Color.fromARGB(255, 233, 200, 11),
+                                          Color.fromARGB(255, 100, 233, 11)
                                         ],
                                       ),
                                     ),
@@ -164,28 +163,28 @@ class _WaiterSignInState extends State<WaiterSignIn> {
                                 onPressed: () {
                                   if (key.currentState!.validate() &&
                                       key.currentState != null) {
-                                    WaiterAuth().signUp(email, password, name);
+                                    CashierAuth().signUp(email, password, name);
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                TablesPage()));
+                                                const TabletCommand()));
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
                                     elevation: 10,
                                     padding: EdgeInsets.zero,
-                                    primary: Colors.green.withOpacity(0.0)),
+                                    primary: const Color.fromARGB(
+                                        255, 233, 200, 11)),
                                 child: Container(
                                     alignment: Alignment.center,
                                     height: size.height * 0.04,
                                     width: double.infinity,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       gradient: LinearGradient(
                                         colors: [
-                                          Constants().green,
-                                          const Color.fromARGB(
-                                              255, 44, 248, 129)
+                                          Color.fromARGB(255, 233, 200, 11),
+                                          Color.fromARGB(255, 44, 248, 129)
                                         ],
                                       ),
                                     ),
@@ -202,7 +201,8 @@ class _WaiterSignInState extends State<WaiterSignIn> {
                 width: size.width * 0.9,
                 child: TextButton(
                     style: TextButton.styleFrom(
-                        elevation: 0, shadowColor: Constants().green),
+                        elevation: 0,
+                        shadowColor: const Color.fromARGB(255, 233, 200, 11)),
                     onPressed: () {
                       setState(() {
                         SignIn = !SignIn;
@@ -212,7 +212,8 @@ class _WaiterSignInState extends State<WaiterSignIn> {
                       SignIn
                           ? 'Click Here to Create new Account!'
                           : 'ClickHere to sign In !',
-                      style: TextStyle(color: Constants().green),
+                      style: const TextStyle(
+                          color: const Color.fromARGB(255, 233, 200, 11)),
                     )),
               ),
             ],
@@ -231,14 +232,14 @@ class _WaiterSignInState extends State<WaiterSignIn> {
       child: TextFormField(
         decoration: InputDecoration(
           border: InputBorder.none,
-          hoverColor: Constants().green,
-          labelStyle: TextStyle(color: Constants().green),
+          hoverColor: const Color.fromARGB(255, 233, 200, 11),
+          labelStyle: const TextStyle(color: Color.fromARGB(255, 233, 200, 11)),
           prefixIcon: Icon(
             icon,
-            color: Constants().green,
+            color: const Color.fromARGB(255, 233, 200, 11),
           ),
           label: const Text('Email'),
-          iconColor: Constants().green,
+          iconColor: const Color.fromARGB(255, 233, 200, 11),
         ),
         onChanged: (val) => setState(() {
           email = val;
@@ -257,8 +258,8 @@ class _WaiterSignInState extends State<WaiterSignIn> {
         },
         controller: controller,
         autocorrect: true,
-        style: TextStyle(
-          color: Constants().green,
+        style: const TextStyle(
+          color: Color.fromARGB(255, 233, 200, 11),
         ),
       ),
     );
@@ -273,14 +274,17 @@ class _WaiterSignInState extends State<WaiterSignIn> {
         obscureText: true,
         decoration: InputDecoration(
           border: InputBorder.none,
-          hoverColor: Constants().green,
+          hoverColor: const Color.fromARGB(255, 233, 200, 11),
           labelStyle: TextStyle(color: Constants().green),
           prefixIcon: Icon(
             icon,
-            color: Constants().green,
+            color: const Color.fromARGB(255, 233, 200, 11),
           ),
-          label: const Text('Password'),
-          iconColor: Constants().green,
+          label: const Text(
+            'Password',
+            style: TextStyle(color: Color.fromARGB(255, 233, 200, 11)),
+          ),
+          iconColor: const Color.fromARGB(255, 233, 200, 11),
         ),
         onChanged: (val) => setState(() {
           password = val;
@@ -309,14 +313,15 @@ class _WaiterSignInState extends State<WaiterSignIn> {
       child: TextFormField(
         decoration: InputDecoration(
           border: InputBorder.none,
-          hoverColor: Constants().green,
-          labelStyle: TextStyle(color: Constants().green),
+          hoverColor: const Color.fromARGB(255, 233, 200, 11),
+          labelStyle:
+              const TextStyle(color: const Color.fromARGB(255, 233, 200, 11)),
           prefixIcon: Icon(
             icon,
-            color: Constants().green,
+            color: const Color.fromARGB(255, 233, 200, 11),
           ),
           label: const Text('userName'),
-          iconColor: Constants().green,
+          iconColor: const Color.fromARGB(255, 233, 200, 11),
         ),
         onChanged: (val) => setState(() {
           name = val;
@@ -330,8 +335,8 @@ class _WaiterSignInState extends State<WaiterSignIn> {
         },
         controller: controller,
         autocorrect: true,
-        style: TextStyle(
-          color: Constants().green,
+        style: const TextStyle(
+          color: Color.fromARGB(255, 233, 200, 11),
         ),
       ),
     );

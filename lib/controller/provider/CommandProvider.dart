@@ -4,6 +4,9 @@ import 'package:restaurant_menu/models/items.dart';
 class CommandProvider extends ChangeNotifier {
   int counter = 0;
   double total = 0;
+  double friesPrice = 0;
+  String fries = '';
+  String friesyes = 'Fries';
   List<Item> commandItems = [];
   double get totalprice => total;
 
@@ -22,6 +25,40 @@ class CommandProvider extends ChangeNotifier {
 
   disposelist() {
     commandItems.clear();
+    notifyListeners();
+  }
+
+  addtotalprice(double itemPrice) {
+    total = total + itemPrice + friesPrice;
+    notifyListeners();
+  }
+
+  deletetotalprice(double itemPrice) {
+    total = total - itemPrice;
+    notifyListeners();
+  }
+
+  resettotale() {
+    total = 0;
+    notifyListeners();
+  }
+
+  addfriesPrice() {
+    friesPrice = 5;
+  }
+
+  removefriesPrice() {
+    friesPrice = 0;
+    notifyListeners();
+  }
+
+  friesYes() {
+    friesyes = 'Fries';
+    notifyListeners();
+  }
+
+  FriesNo() {
+    fries = '';
     notifyListeners();
   }
 }

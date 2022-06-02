@@ -4,6 +4,7 @@ import 'package:restaurant_menu/controller/firebase/waiterAuth.dart';
 import 'package:restaurant_menu/pages/Home.dart';
 import 'package:restaurant_menu/pages/WaiterSignIn.dart';
 import 'package:restaurant_menu/utils/constant.dart';
+import 'package:restaurant_menu/widgets/FadeAnimation.dart';
 
 import '../utils/routeAnimation.dart';
 
@@ -67,12 +68,15 @@ class _TablesPageState extends State<TablesPage> {
                     ),
                     Stack(
                       children: [
-                        Container(
-                          height: size.height * 0.7,
-                          decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage('assets/PlanGround.jpg'),
-                                  fit: BoxFit.fill)),
+                        FadeAnimation(
+                          1.2,
+                          Container(
+                            height: size.height * 0.7,
+                            decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage('assets/PlanGround.jpg'),
+                                    fit: BoxFit.fill)),
+                          ),
                         ),
                         Positioned(
                           bottom: 140,
@@ -91,15 +95,18 @@ class _TablesPageState extends State<TablesPage> {
                                     )));
                               });
                             },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Constants().green,
-                                  borderRadius: BorderRadius.circular(8)),
-                              width: size.width * 0.1,
-                              height: size.height * 0.0455,
-                              child: const Text(
-                                'Table 1',
-                                textAlign: TextAlign.center,
+                            child: FadeAnimation(
+                              1.4,
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: Constants().green,
+                                    borderRadius: BorderRadius.circular(8)),
+                                width: size.width * 0.1,
+                                height: size.height * 0.0455,
+                                child: const Text(
+                                  'Table 1',
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             ),
                           ),
@@ -121,15 +128,18 @@ class _TablesPageState extends State<TablesPage> {
                                     )));
                               });
                             },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Constants().green,
-                                  borderRadius: BorderRadius.circular(8)),
-                              width: size.width * 0.1,
-                              height: size.height * 0.05,
-                              child: const Text(
-                                'Table 2',
-                                textAlign: TextAlign.center,
+                            child: FadeAnimation(
+                              1.4,
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: Constants().green,
+                                    borderRadius: BorderRadius.circular(8)),
+                                width: size.width * 0.1,
+                                height: size.height * 0.05,
+                                child: const Text(
+                                  'Table 2',
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             ),
                           ),
@@ -151,15 +161,18 @@ class _TablesPageState extends State<TablesPage> {
                                     )));
                               });
                             },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Constants().green,
-                                  borderRadius: BorderRadius.circular(8)),
-                              width: size.width * 0.1,
-                              height: size.height * 0.0455,
-                              child: const Text(
-                                'Table 3',
-                                textAlign: TextAlign.center,
+                            child: FadeAnimation(
+                              1.4,
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: Constants().green,
+                                    borderRadius: BorderRadius.circular(8)),
+                                width: size.width * 0.1,
+                                height: size.height * 0.0455,
+                                child: const Text(
+                                  'Table 3',
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             ),
                           ),
@@ -184,12 +197,15 @@ class _TablesPageState extends State<TablesPage> {
                   ),
                   Stack(
                     children: [
-                      Container(
-                        height: size.height * 0.7,
-                        decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage('assets/planroof.jpg'),
-                                fit: BoxFit.fill)),
+                      FadeAnimation(
+                        1.4,
+                        Container(
+                          height: size.height * 0.7,
+                          decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/planroof.jpg'),
+                                  fit: BoxFit.fill)),
+                        ),
                       ),
                       Positioned(
                         bottom: 135,
@@ -208,15 +224,18 @@ class _TablesPageState extends State<TablesPage> {
                                   )));
                             });
                           },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Constants().green,
-                                borderRadius: BorderRadius.circular(8)),
-                            width: size.width * 0.14,
-                            height: size.height * 0.038,
-                            child: const Center(
-                              child: Text(
-                                'Table 1',
+                          child: FadeAnimation(
+                            1.5,
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Constants().green,
+                                  borderRadius: BorderRadius.circular(8)),
+                              width: size.width * 0.14,
+                              height: size.height * 0.038,
+                              child: const Center(
+                                child: Text(
+                                  'Table 1',
+                                ),
                               ),
                             ),
                           ),
@@ -239,15 +258,18 @@ class _TablesPageState extends State<TablesPage> {
                                   )));
                             });
                           },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Constants().green,
-                                borderRadius: BorderRadius.circular(8)),
-                            width: size.width * 0.14,
-                            height: size.height * 0.038,
-                            child: const Center(
-                              child: Text(
-                                'Table 2',
+                          child: FadeAnimation(
+                            1.5,
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Constants().green,
+                                  borderRadius: BorderRadius.circular(8)),
+                              width: size.width * 0.14,
+                              height: size.height * 0.038,
+                              child: const Center(
+                                child: Text(
+                                  'Table 2',
+                                ),
                               ),
                             ),
                           ),
@@ -270,15 +292,18 @@ class _TablesPageState extends State<TablesPage> {
                                   )));
                             });
                           },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Constants().green,
-                                borderRadius: BorderRadius.circular(8)),
-                            width: size.width * 0.14,
-                            height: size.height * 0.038,
-                            child: const Center(
-                              child: Text(
-                                'Table 3',
+                          child: FadeAnimation(
+                            1.5,
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Constants().green,
+                                  borderRadius: BorderRadius.circular(8)),
+                              width: size.width * 0.14,
+                              height: size.height * 0.038,
+                              child: const Center(
+                                child: Text(
+                                  'Table 3',
+                                ),
                               ),
                             ),
                           ),
@@ -301,15 +326,18 @@ class _TablesPageState extends State<TablesPage> {
                                   )));
                             });
                           },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Constants().green,
-                                borderRadius: BorderRadius.circular(8)),
-                            width: size.width * 0.14,
-                            height: size.height * 0.038,
-                            child: const Center(
-                              child: Text(
-                                'Table 4',
+                          child: FadeAnimation(
+                            1.5,
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Constants().green,
+                                  borderRadius: BorderRadius.circular(8)),
+                              width: size.width * 0.14,
+                              height: size.height * 0.038,
+                              child: const Center(
+                                child: Text(
+                                  'Table 4',
+                                ),
                               ),
                             ),
                           ),

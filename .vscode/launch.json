@@ -1,0 +1,40 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "restaurant_menu",
+            "request": "launch",
+            "type": "dart"
+        },
+      
+        {
+            "name": "restaurant_menu (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "phone",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "emulator-5554"
+            
+        },
+        {
+            "name": "tablet",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "emulator-5556"
+            
+        },
+    ],"compounds": [
+        {
+            "name": "All",
+            "configurations": ["phone","tablet"]
+        }
+    ]
+    
+}

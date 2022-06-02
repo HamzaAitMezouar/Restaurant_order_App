@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant_menu/controller/itemController.dart';
 import 'package:restaurant_menu/models/items.dart';
 import 'package:restaurant_menu/pages/foodTypes/dessert.dart';
 import 'package:restaurant_menu/widgets/Shimmer.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import '../../controller/provider/CommandProvider.dart';
+import '../../utils/constant.dart';
 import '../../utils/routeAnimation.dart';
 import '../../widgets/FadeAnimation.dart';
 import 'dart:ui' as ui;
+
+import '../Home.dart';
 
 class beverage extends StatelessWidget {
   int floor;
@@ -24,6 +29,7 @@ class beverage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final beverage = Provider.of<CommandProvider>(context);
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -58,7 +64,11 @@ class beverage extends StatelessWidget {
                   stream: itemController().getItemsByType(type),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
-                      return Shimmerpage();
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: Constants().green,
+                        ),
+                      );
                     } else if (snapshot.hasData) {
                       List<Item> items = snapshot.data!;
                       return SizedBox(
@@ -75,6 +85,8 @@ class beverage extends StatelessWidget {
                                 InkWell(
                                   onTap: () {
                                     dialogdessert(context);
+                                    beverage.addItem(items[index]);
+                                    beverage.addtotalprice(items[index].price);
                                   },
                                   child: Container(
                                     height: index % 3 == 0
@@ -154,7 +166,11 @@ class beverage extends StatelessWidget {
                         ),
                       );
                     } else {
-                      return Shimmerpage();
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: Constants().green,
+                        ),
+                      );
                     }
                   },
                 ))
@@ -166,45 +182,55 @@ class beverage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        content: Container(
-          width: size.width * 0.4,
+      builder: (context) => FadeAnimation(
+        1.5,
+        AlertDialog(
+          content: Container(
+              width: size.width * 0.4,
+              child: Image.asset('assets/dessertAlert.jpg')),
+          title: Text(
+            'Desserts ?',
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                foreground: Paint()
+                  ..shader = ui.Gradient.linear(
+                    const Offset(0, 20),
+                    const Offset(150, 20),
+                    <Color>[
+                      Color.fromARGB(255, 155, 22, 22),
+                      Color.fromARGB(255, 255, 145, 0),
+                    ],
+                  )),
+          ),
+          elevation: 2,
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pushReplacement(
+                      context,
+                      pageRoute(
+                          child: home(
+                        floor: floor,
+                        table: table,
+                      )));
+                },
+                child: const Text('No')),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      pageRoute(
+                          child: dessert(
+                              floor: floor,
+                              table: table,
+                              type: 'dessert',
+                              size: size)));
+                },
+                child: const Text('Yes'))
+          ],
         ),
-        title: Text(
-          'Desserts ?',
-          style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              foreground: Paint()
-                ..shader = ui.Gradient.linear(
-                  const Offset(0, 20),
-                  const Offset(150, 20),
-                  <Color>[
-                    Color.fromARGB(255, 155, 22, 22),
-                    Color.fromARGB(255, 255, 145, 0),
-                  ],
-                )),
-        ),
-        elevation: 2,
-        actions: [
-          ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('No')),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    pageRoute(
-                        child: dessert(
-                            floor: floor,
-                            table: table,
-                            type: 'dessert',
-                            size: size)));
-              },
-              child: const Text('Yes'))
-        ],
       ),
     );
   }

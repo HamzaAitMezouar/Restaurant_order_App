@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant_menu/controller/itemController.dart';
+import 'package:restaurant_menu/controller/provider/CommandProvider.dart';
 import 'package:restaurant_menu/models/items.dart';
+import 'package:restaurant_menu/pages/Home.dart';
 import 'package:restaurant_menu/widgets/Shimmer.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import '../../utils/constant.dart';
+import '../../utils/routeAnimation.dart';
 import '../../widgets/FadeAnimation.dart';
 import 'dart:ui' as ui;
 
@@ -22,6 +27,7 @@ class dessert extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dessertPro = Provider.of<CommandProvider>(context);
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -56,7 +62,11 @@ class dessert extends StatelessWidget {
                   stream: itemController().getItemsByType(type),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
-                      return Shimmerpage();
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: Constants().green,
+                        ),
+                      );
                     } else if (snapshot.hasData) {
                       List<Item> items = snapshot.data!;
                       return SizedBox(
@@ -71,7 +81,18 @@ class dessert extends StatelessWidget {
                             return FadeAnimation(
                                 1.8,
                                 InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    dessertPro.addItem(items[index]);
+                                    dessertPro
+                                        .addtotalprice(items[index].price);
+                                    Navigator.push(
+                                        context,
+                                        pageRoute(
+                                            child: home(
+                                          floor: floor,
+                                          table: table,
+                                        )));
+                                  },
                                   child: Container(
                                     height: index % 3 == 0
                                         ? size.height * 0.3
@@ -150,7 +171,11 @@ class dessert extends StatelessWidget {
                         ),
                       );
                     } else {
-                      return Shimmerpage();
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: Constants().green,
+                        ),
+                      );
                     }
                   },
                 ))
