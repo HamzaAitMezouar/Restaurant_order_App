@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:restaurant_menu/models/ModelCommand.dart';
 
@@ -61,7 +63,42 @@ class firebaseCommand {
   }
 
   Stream<QuerySnapshot> gettable() {
-    print(data.collection('table').snapshots());
     return data.collection('table').snapshots();
+  }
+
+  commanReady(int floor, int table) async {
+    var collection = data
+        .collection('commands')
+        .where('floor', isEqualTo: floor)
+        .where('table', isEqualTo: table);
+    var querySnapshots = await collection.get();
+    for (var doc in querySnapshots.docs) {
+      await doc.reference.update({
+        'isReady': true,
+      });
+    }
+  }
+
+  commandDelete(int floor, int table) async {
+    var collection = data
+        .collection('commands')
+        .where('floor', isEqualTo: floor)
+        .where('table', isEqualTo: table);
+    var querySnapshots = await collection.get();
+    for (var doc in querySnapshots.docs) {
+      await doc.reference.delete();
+    }
+  }
+
+  tableDelete(int floor, int table) async {
+    var collection = data
+        .collection('table')
+        .where('floor', isEqualTo: floor)
+        .where('table', isEqualTo: table);
+    var querySnapshots = await collection.get();
+
+    for (var doc in querySnapshots.docs) {
+      doc.reference.delete();
+    }
   }
 }
