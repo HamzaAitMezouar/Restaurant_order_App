@@ -175,6 +175,9 @@ class CommandState extends State<Command> {
           ),
           Center(
             child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    elevation: 10,
+                    primary: Color.fromARGB(255, 9, 240, 163).withOpacity(0.8)),
                 onPressed: () {
                   Navigator.pushReplacement(
                       context, pageRoute(child: const TablesPage()));

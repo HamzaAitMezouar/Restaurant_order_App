@@ -25,6 +25,9 @@ class CommandProvider extends ChangeNotifier {
 
   disposelist() {
     commandItems.clear();
+    counter = 0;
+    total = 0;
+    friesPrice = 0;
     notifyListeners();
   }
 
@@ -45,6 +48,7 @@ class CommandProvider extends ChangeNotifier {
 
   addfriesPrice() {
     friesPrice = 5;
+    notifyListeners();
   }
 
   removefriesPrice() {

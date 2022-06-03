@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_menu/controller/provider/CommandProvider.dart';
 import 'package:restaurant_menu/pages/Command.dart';
+import 'package:restaurant_menu/pages/TablesPage.dart';
 import 'package:restaurant_menu/pages/foodTypes/beverage.dart';
 import 'package:restaurant_menu/pages/foodTypes/burger.dart';
 import 'package:restaurant_menu/widgets/FadeAnimation.dart';
@@ -192,8 +193,9 @@ class FutureBuilderClassState extends State<FutureBuilderClass> {
                                       elevation: 2,
                                       shadowColor: Colors.amber),
                                   onPressed: () {
-                                    Navigator.pop(context);
-                                    //   command.disposelist();
+                                    Navigator.pushReplacement(context,
+                                        pageRoute(child: TablesPage()));
+                                    command.disposelist();
                                   },
                                   child: Text('Cancel'),
                                 ),

@@ -230,6 +230,7 @@ class TabletSignInState extends State<TabletSignIn> {
       width: MediaQuery.of(context).size.width * 0.9,
       key: ValueKey(valuekey),
       child: TextFormField(
+        keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           border: InputBorder.none,
           hoverColor: const Color.fromARGB(255, 233, 200, 11),
@@ -271,11 +272,12 @@ class TabletSignInState extends State<TabletSignIn> {
       width: MediaQuery.of(context).size.width * 0.9,
       key: ValueKey(valuekey),
       child: TextFormField(
+        keyboardType: TextInputType.visiblePassword,
         obscureText: true,
         decoration: InputDecoration(
           border: InputBorder.none,
           hoverColor: const Color.fromARGB(255, 233, 200, 11),
-          labelStyle: TextStyle(color: Constants().green),
+          labelStyle: const TextStyle(color: Color.fromARGB(255, 233, 200, 11)),
           prefixIcon: Icon(
             icon,
             color: const Color.fromARGB(255, 233, 200, 11),
@@ -299,7 +301,7 @@ class TabletSignInState extends State<TabletSignIn> {
         controller: controller,
         autocorrect: true,
         style: TextStyle(
-          color: Constants().green,
+          color: Color.fromARGB(255, 233, 200, 11),
         ),
       ),
     );
@@ -311,6 +313,7 @@ class TabletSignInState extends State<TabletSignIn> {
       width: MediaQuery.of(context).size.width * 0.9,
       key: ValueKey(valuekey),
       child: TextFormField(
+        keyboardType: TextInputType.name,
         decoration: InputDecoration(
           border: InputBorder.none,
           hoverColor: const Color.fromARGB(255, 233, 200, 11),

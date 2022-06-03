@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_menu/controller/itemController.dart';
 import 'package:restaurant_menu/models/items.dart';
 import 'package:restaurant_menu/pages/foodTypes/dessert.dart';
-import 'package:restaurant_menu/widgets/Shimmer.dart';
+
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../../controller/provider/CommandProvider.dart';
 import '../../utils/constant.dart';
@@ -37,8 +37,8 @@ class beverage extends StatelessWidget {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text('Floor ${floor}'),
-              Text('Table ${table}'),
+              Text('Floor $floor'),
+              Text('Table $table'),
             ],
           ),
         ),
@@ -88,7 +88,7 @@ class beverage extends StatelessWidget {
                                     beverage.addItem(items[index]);
                                     beverage.addtotalprice(items[index].price);
                                   },
-                                  child: Container(
+                                  child: SizedBox(
                                     height: index % 3 == 0
                                         ? size.height * 0.3
                                         : index == 2
@@ -185,7 +185,12 @@ class beverage extends StatelessWidget {
       builder: (context) => FadeAnimation(
         1.5,
         AlertDialog(
-          content: Container(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          backgroundColor:
+              const Color.fromARGB(255, 12, 245, 187).withOpacity(0.7),
+          content: SizedBox(
+              height: size.height * 0.2,
               width: size.width * 0.4,
               child: Image.asset('assets/dessertAlert.jpg')),
           title: Text(
@@ -198,8 +203,8 @@ class beverage extends StatelessWidget {
                     const Offset(0, 20),
                     const Offset(150, 20),
                     <Color>[
-                      Color.fromARGB(255, 155, 22, 22),
-                      Color.fromARGB(255, 255, 145, 0),
+                      const Color.fromARGB(255, 155, 22, 22),
+                      const Color.fromARGB(255, 255, 145, 0),
                     ],
                   )),
           ),

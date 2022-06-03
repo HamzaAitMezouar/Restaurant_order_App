@@ -216,6 +216,10 @@ class burgersState extends State<burgers> {
       builder: (context) => FadeAnimation(
         1.5,
         AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          backgroundColor:
+              const Color.fromARGB(255, 12, 245, 187).withOpacity(0.7),
           content: Container(
               height: size.height * 0.2,
               width: size.width * 0.4,
@@ -230,28 +234,33 @@ class burgersState extends State<burgers> {
                     const Offset(0, 20),
                     const Offset(150, 20),
                     <Color>[
-                      Color.fromARGB(255, 155, 22, 22),
-                      Color.fromARGB(255, 255, 145, 0),
+                      const Color.fromARGB(255, 155, 22, 22),
+                      const Color.fromARGB(255, 255, 145, 0),
                     ],
                   )),
           ),
           elevation: 2,
           actions: [
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  dialogbeverage(context);
-                  burger.removefriesPrice();
-                  burger.FriesNo();
-                },
-                child: const Text('No')),
-            ElevatedButton(
-                onPressed: () {
-                  dialogbeverage(context);
-                  burger.addfriesPrice();
-                  burger.friesYes();
-                },
-                child: const Text('Yes(5\$)'))
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      dialogbeverage(context);
+                      burger.removefriesPrice();
+                      burger.FriesNo();
+                    },
+                    child: const Text('No')),
+                ElevatedButton(
+                    onPressed: () {
+                      dialogbeverage(context);
+                      burger.addfriesPrice();
+                      burger.friesYes();
+                    },
+                    child: const Text('Yes(5\$)'))
+              ],
+            )
           ],
         ),
       ),
@@ -264,6 +273,10 @@ class burgersState extends State<burgers> {
       builder: (context) => FadeAnimation(
         1.5,
         AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          backgroundColor:
+              const Color.fromARGB(255, 12, 245, 187).withOpacity(0.7),
           content: Container(
               height: size.height * 0.2,
               width: size.width * 0.4,
@@ -278,8 +291,8 @@ class burgersState extends State<burgers> {
                     const Offset(0, 20),
                     const Offset(150, 20),
                     <Color>[
-                      Color.fromARGB(255, 155, 22, 22),
-                      Color.fromARGB(255, 255, 145, 0),
+                      const Color.fromARGB(255, 155, 22, 22),
+                      const Color.fromARGB(255, 255, 145, 0),
                     ],
                   )),
           ),
@@ -316,7 +329,12 @@ class burgersState extends State<burgers> {
       builder: (context) => FadeAnimation(
         1.5,
         AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          backgroundColor:
+              const Color.fromARGB(255, 12, 245, 187).withOpacity(0.7),
           content: Container(
+              height: size.height * 0.2,
               width: size.width * 0.4,
               child: Image.asset('assets/dessertAlert.jpg')),
           title: Text(
@@ -329,8 +347,8 @@ class burgersState extends State<burgers> {
                     const Offset(0, 20),
                     const Offset(150, 20),
                     <Color>[
-                      Color.fromARGB(255, 155, 22, 22),
-                      Color.fromARGB(255, 255, 145, 0),
+                      const Color.fromARGB(255, 155, 22, 22),
+                      const Color.fromARGB(255, 255, 145, 0),
                     ],
                   )),
           ),

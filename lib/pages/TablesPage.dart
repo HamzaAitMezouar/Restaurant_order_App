@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant_menu/controller/firebase/waiterAuth.dart';
+import 'package:restaurant_menu/pages/CommandReady.dart';
 import 'package:restaurant_menu/pages/Home.dart';
 import 'package:restaurant_menu/pages/WaiterSignIn.dart';
 import 'package:restaurant_menu/utils/constant.dart';
@@ -27,15 +28,72 @@ class _TablesPageState extends State<TablesPage> {
           extendBodyBehindAppBar: true,
           appBar: AppBar(
             actions: [
-              IconButton(
-                  onPressed: () {
-                    WaiterAuth().signOut();
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => WaiterSignIn()));
-                  },
-                  icon: Icon(Icons.logout_rounded))
+              PopupMenuButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  elevation: 5,
+                  color: Colors.white.withOpacity(0.7),
+                  itemBuilder: (context) {
+                    return [
+                      PopupMenuItem(
+                          child: InkWell(
+                        child: Row(children: [
+                          Icon(
+                            Icons.food_bank,
+                            color:
+                                Color.fromARGB(255, 134, 0, 0).withOpacity(0.5),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.04,
+                          ),
+                          const Text('Orders State',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Color.fromARGB(255, 134, 0, 0))),
+                        ]),
+                        onTap: () {
+                          Navigator.push(
+                              context, pageRoute(child: CommandReady()));
+                        },
+                      )),
+                      PopupMenuItem(
+                          child: Row(
+                        children: [
+                          Icon(
+                            Icons.dark_mode,
+                            color: Colors.black.withOpacity(0.5),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.04,
+                          ),
+                          const Switch(value: false, onChanged: null)
+                        ],
+                      )),
+                      PopupMenuItem(
+                          child: Container(
+                        child: TextButton(
+                            onPressed: () {
+                              WaiterAuth().signOut();
+
+                              Navigator.pushReplacement(context,
+                                  pageRoute(child: const WaiterSignIn()));
+                            },
+                            child: Row(
+                              children: [
+                                const Icon(Icons.logout),
+                                SizedBox(
+                                  width: size.width * 0.04,
+                                ),
+                                const Text('LogOut')
+                              ],
+                            )),
+                        decoration: const BoxDecoration(
+                            border: Border(
+                                top: const BorderSide(color: Colors.black))),
+                      ))
+                    ];
+                  })
             ],
             backgroundColor: Colors.transparent,
             bottom: TabBar(indicatorColor: Constants().green, tabs: [
