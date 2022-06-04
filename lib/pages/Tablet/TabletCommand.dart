@@ -209,7 +209,7 @@ class _TabletCommandState extends State<TabletCommand> {
                         height: size.height * 0.2,
                         child: ListView.builder(
                             padding: EdgeInsets.zero,
-                            itemCount: command.length,
+                            itemCount: command.length.compareTo(0),
                             itemBuilder: (context, i) {
                               return Card(
                                 child: ListTile(
