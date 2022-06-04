@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant_menu/controller/firebase/waiterAuth.dart';
@@ -19,6 +20,19 @@ class TablesPage extends StatefulWidget {
 class _TablesPageState extends State<TablesPage> {
   late int floor;
   late int table;
+  late User user;
+  @override
+  void initState() {
+    super.initState();
+    onrefresh(FirebaseAuth.instance.currentUser);
+  }
+
+  onrefresh(userCre) {
+    setState(() {
+      user = userCre;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

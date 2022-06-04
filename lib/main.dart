@@ -8,8 +8,7 @@ import 'package:restaurant_menu/controller/provider/CommandProvider.dart';
 import 'package:restaurant_menu/pages/Tablet/TabletSignIn.dart';
 import 'package:restaurant_menu/pages/WaiterSignIn.dart';
 
-
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   /*await Hive.initFlutter();
   Hive.registerAdapter(CommandHiveAdapter());
